@@ -21,11 +21,19 @@ const __dirname = path.resolve();
 app.use(express.json());
 app.use(cookieParser());
 
-const FRONTEND_ORIGIN = process.env.FRONTEND_URL || 'http://localhost:5173';
+// CORS: allow deployed frontend and localhost during development
+const allowedOrigins = [
+  process.env.FRONTEND_ORIGIN, // e.g., https://frontend-inclusight-u5nq.vercel.app
+  "http://localhost:5173",
+].filter(Boolean);
 
 app.use(
   cors({
-    origin: FRONTEND_ORIGIN,
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      callback(new Error("CORS policy: origin not allowed"), false);
+    },
     credentials: true,
   })
 );
