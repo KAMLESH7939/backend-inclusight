@@ -6,7 +6,7 @@ const app = express();
 const server = http.createServer(app);
 
 // allow both single origin or multiple (split by comma)
-const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:5173";
+const FRONTEND_ORIGIN = 'https://frontend-inclusight-u5nq.vercel.app' || "http://localhost:5173";
 
 const io = new Server(server, {
   cors: {
