@@ -21,11 +21,11 @@ const __dirname = path.resolve();
 app.use(express.json());
 app.use(cookieParser());
 
-const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:5173";
+const FRONTEND_ORIGIN = 'https://frontend-inclusight-u5nq.vercel.app' || "http://localhost:5173";
 
 app.use(
   cors({
-    origin: 'https://frontend-inclusight-u5nq.vercel.app',
+    origin: FRONTEND_ORIGIN,
     credentials: true,
   })
 );
